@@ -11,11 +11,11 @@
 
 <form method="post" style="max-width:600px;" th:object="${categories}">
         <ul th:each="category : ${categories}">
-            <li th:text="${category.id} ${category.name}"></li>
-
+            <li th:text="${category.name}"></li>
         </ul>
 
-    <input type="submit" value="Add Category" />
+    <a href="/category/add">Add Category</>
+    <!-- <input type="submit" value="Add Category" /> -->
 </form>
 
 
