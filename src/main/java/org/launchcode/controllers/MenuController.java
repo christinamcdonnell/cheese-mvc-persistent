@@ -7,8 +7,10 @@ import org.launchcode.models.data.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by Christy on 6/21/2017.
@@ -40,5 +42,31 @@ public class MenuController {
         return "menu/add";
     }
 
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String add(@ModelAttribute @Valid Menu newMenu, Errors errors, @RequestParam int menuId, Model model) {
 
+        if(errors.hasErrors() ) {
+            model.addAttribute("title", "Add Menu");
+            return "menu/add";
+        }
+
+        Menu some_new_menu = menuDao.findOne(menuId);
+
+        //newMenu.setMenu(some_new_menu);
+
+        menuDao.save(some_new_menu);
+        return "redirect:view/" + some_new_menu.getId();
+
+    }
+
+    @RequestMapping(value="view/(menuId}", method = RequestMethod.GET)
+    public String viewMenu(@PathVariable int menuId, Model model) {
+
+        Menu oneMenu = menuDao.findOne(menuId);
+        model.addAttribute(new Menu());
+        model.addAttribute("title", oneMenu.getName());
+        model.addAttribute("menu", oneMenu);
+
+        return "redirect:view/" + menuId;
+    }
 }

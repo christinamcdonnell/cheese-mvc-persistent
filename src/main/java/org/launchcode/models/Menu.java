@@ -36,9 +36,9 @@ public class Menu {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    //public void setId(int id) {
+     //   this.id = id;
+    //}
 
     public String getName() {
         return name;
@@ -53,6 +53,6 @@ public class Menu {
     }
 
     public void addItem(Cheese item){
-        cheeses.add(item);
+        cheeses.add(item); // add a Cheese (item) to the arraylist of cheeses
     }
 }

@@ -56,11 +56,11 @@ public class CheeseController {
             return "cheese/add";
         }
 
-        Category cat = categoryDao.findOne(categoryId); // import WHAT ???
-            //findOne fetches 1 Category object with the given categoryId
-        newCheese.setCategory(cat);
+        Category cat = categoryDao.findOne(categoryId); // import nothing use the instance NOT the class
+            //findOne fetches 1 Category with the given categoryId (all fields are not filled in) FROM MAMP db
+        newCheese.setCategory(cat); // Assigns info to pgm internal object & setups up other object field values (cheese category)
 
-        cheeseDao.save(newCheese);
+        cheeseDao.save(newCheese); // Saves pgm completely filled object -> to the MAMP db tables
         return "redirect:";
     }
 
