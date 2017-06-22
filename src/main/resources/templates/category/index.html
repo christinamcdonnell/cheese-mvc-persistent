@@ -13,9 +13,10 @@
         <ul th:each="category : ${categories}">
             <li th:text="${category.name}"></li>
         </ul>
+    <nav>
+        <a href="/category/add">Add Category</a>
+    </nav>
 
-    <a href="/category/add">Add Category</>
-    <!-- <input type="submit" value="Add Category" /> -->
 </form>
 
 
