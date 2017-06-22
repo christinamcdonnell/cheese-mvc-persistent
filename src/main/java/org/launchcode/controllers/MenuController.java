@@ -69,4 +69,16 @@ public class MenuController {
 
         return "redirect:view/" + menuId;
     }
+
+    @RequestMapping(value="add-item/(menuId}", method = RequestMethod.GET)
+    public String addItem(@PathVariable int menuId, Model model) {
+
+
+        Menu oneMenu = menuDao.findOne(menuId);
+        model.addAttribute(new Menu());
+        model.addAttribute("title", oneMenu.getName());
+        model.addAttribute("menu", oneMenu);
+
+        return  ;
+    }
 }
