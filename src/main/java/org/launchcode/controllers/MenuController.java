@@ -1,9 +1,11 @@
 package org.launchcode.controllers;
 
 //import org.launchcode.models.Cheese;
+import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
+import org.launchcode.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,15 +72,26 @@ public class MenuController {
         return "redirect:view/" + menuId;
     }
 
-    @RequestMapping(value="add-item/(menuId}", method = RequestMethod.GET)
+    @RequestMapping(value="add-item/{menuId}", method = RequestMethod.GET)
     public String addItem(@PathVariable int menuId, Model model) {
 
-
         Menu oneMenu = menuDao.findOne(menuId);
-        model.addAttribute(new Menu());
-        model.addAttribute("title", oneMenu.getName());
-        model.addAttribute("menu", oneMenu);
+        Iterable<Cheese> allCheesesList = cheeseDao.findAll();
 
-        return  ;
+        model.addAttribute("form",  new AddMenuItemForm(oneMenu, allCheesesList));
+
+        model.addAttribute("title", "Add item to menu: " + oneMenu.getName());
+
+        //model.addAttribute(new Menu());
+        //model.addAttribute("menu", oneMenu);
+
+        return  "redirect: menu/add-item/" + menuId; // DO THEY WANT the menuId on this path
+    }
+
+
+    // THIS NEEDS TO BE FIXED THE METHOD NAME SHOULDN"T NEED TO BE DIFF THAN THE GET
+    @RequestMapping(value="menu/add-item/(menuId}", method = RequestMethod.POST)
+    public String addItemPost(@PathVariable int menuId, Model model) {
+        return "";
     }
 }
