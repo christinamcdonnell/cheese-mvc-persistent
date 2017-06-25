@@ -8,19 +8,15 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${menus} and ${menus.size()}">no menu :(</p>
-
-<form method="post" style="max-width:600px;" th:object="${menus}">
-
-    <ul th:each="menu : ${menus}">
-        <li th:text="${menu.name}"> <a href="/menu/view/${menu.id}" ></a></li>
+    <ul>
+        <li th:each="menu : ${menus}">
+            <a href="'/menu/view/' + ${menu.id}" th:text="${menu.name}" ></a>
+        </li>
     </ul>
     <br>
-    <nav>
-        <a href="/menu/add">Add Category</a>
-    </nav>
-
-</form>
+    <p>
+        <a href="/menu/add">Add Menu</a>
+    </p>
 
 </body>
 </html>
