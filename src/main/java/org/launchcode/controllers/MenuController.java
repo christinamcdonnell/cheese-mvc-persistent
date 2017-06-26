@@ -45,27 +45,24 @@ public class MenuController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(@ModelAttribute @Valid Menu newMenu, Errors errors, @RequestParam int menuId, Model model) {
+    public String add(@ModelAttribute @Valid Menu newMenu, Errors errors, Model model) {
 
         if(errors.hasErrors() ) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
         }
-
         //Menu some_new_menu = menuDao.findOne(menuId);
-
         //newMenu.setMenu(some_new_menu);
-
         menuDao.save(newMenu);
-        return "redirect:view/" + newMenu.getId();
 
+        return "redirect:view/" + newMenu.getId();
     }
 
-    @RequestMapping(value="view/(menuId}", method = RequestMethod.GET)
+    @RequestMapping(value="menu/view/(menuId}", method = RequestMethod.GET)
     public String viewMenu(@PathVariable int menuId, Model model) {
-
+        System.out.println("BEGINNING CHRISTY: viewMenu!!!!!!!!!");
         Menu oneMenu = menuDao.findOne(menuId);
-        model.addAttribute(new Menu());
+        //model.addAttribute(new Menu());
         model.addAttribute("title", oneMenu.getName());
         model.addAttribute("menu", oneMenu);
 

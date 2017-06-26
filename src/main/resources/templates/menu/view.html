@@ -7,15 +7,11 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method="post" style="max-width:600px;" th:object="${menu}">
-
     <ul th:each="cheeseitem : ${menu.cheeses}">
         <li th:text="${cheeseitem.name}"></li>
     </ul>
-    <nav>
-        <p><a th:href="'/menu/add-item/' + ${menu.id}">Add Cheese</a></p>
-    </nav>
 
+    <p><a th:href="'/menu/add-item/' + ${menu.id}">Add Cheese</a></p>
 </form>
-
 </body>
 </html>
