@@ -83,25 +83,21 @@ public class MenuController {
 
         //model.addAttribute(new Menu());
         //model.addAttribute("menu", oneMenu);
-
-        return  "menu/add-item"; // DO NOT WANT the menuId on this path. goes to html file
+        return  "menu/add-item"; // NO menuId on this path. goes to html file
     }
 
-    @RequestMapping(value="menu/add-item/{menuId}", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
+    @RequestMapping(value="add-item/{menuId}", method = RequestMethod.POST)
+    public String addItem(@ModelAttribute @PathVariable int menuId, Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
 
         if(errors.hasErrors() ) {
             model.addAttribute("form", form);
             return "menu/add-item";
         }
-
         Cheese aCheese = cheeseDao.findOne(form.getCheeseId());
         Menu aMenu = menuDao.findOne(form.getMenuId());
 
-
         aMenu.addItem(aCheese);
         menuDao.save(aMenu);
-
-        return "redirect:.view/" + aMenu.getId(); // menu/view.html
+        return "redirect:../view/" + aMenu.getId(); // menu/view.html
     }
 }

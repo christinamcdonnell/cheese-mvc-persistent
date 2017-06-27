@@ -43,7 +43,7 @@ public class CheeseController {
         model.addAttribute("title", "Add Cheese");
         model.addAttribute(new Cheese());
         model.addAttribute("categories", categoryDao.findAll());
-        // model.addAttribute("cheeseTypes", CheeseType.values());
+        //model.addAttribute("cheeseTypes", CheeseType.values());
         return "cheese/add";
     }
 
@@ -53,6 +53,7 @@ public class CheeseController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
 
