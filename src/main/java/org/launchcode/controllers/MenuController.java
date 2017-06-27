@@ -67,7 +67,7 @@ public class MenuController {
         model.addAttribute("menu", oneMenu);
 
         //return "redirect:view/" + menuId;
-        return "menu/view";
+        return "menu/view"; // goes to menu/view.html
     }
 
     @RequestMapping(value="add-item/{menuId}", method = RequestMethod.GET)
@@ -84,10 +84,10 @@ public class MenuController {
         //model.addAttribute(new Menu());
         //model.addAttribute("menu", oneMenu);
 
-        return  "redirect: menu/add-item/" + menuId; // WANT the menuId on this path ????
+        return  "menu/add-item"; // DO NOT WANT the menuId on this path. goes to html file
     }
 
-    @RequestMapping(value="menu/add-item", method = RequestMethod.POST)
+    @RequestMapping(value="menu/add-item/{menuId}", method = RequestMethod.POST)
     public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
 
         if(errors.hasErrors() ) {
@@ -102,6 +102,6 @@ public class MenuController {
         aMenu.addItem(aCheese);
         menuDao.save(aMenu);
 
-        return "redirect:view/" + aMenu.getId();
+        return "redirect:.view/" + aMenu.getId(); // menu/view.html
     }
 }
